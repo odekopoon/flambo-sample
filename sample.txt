@@ -1,0 +1,5 @@
+aaa bbb ccc ddd
+aaa aaa aaa aaa
+ccc ddd aaaa bbbb
+eeee   fffff gggg
+bbb bbb bbb ccc
