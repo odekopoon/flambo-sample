@@ -27,7 +27,7 @@
       (fs/map (fn [[tag cnt]] [cnt tag]))
       (fs/transform #(f/sort-by-key % >))))
 
-(defn- main []
+(defn -main []
   (fs/print hashtag-count)
   (.start ssc)
   (.awaitTermination ssc))
