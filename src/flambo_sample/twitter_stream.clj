@@ -1,5 +1,6 @@
 (ns flambo-sample.twitter_stream
   (:require  [flambo.api :as f]
+             [flambo.tuple :as ft]
              [flambo.streaming :as fs]
              [flambo.conf :as conf])
   (:import   [org.apache.spark.streaming.twitter TwitterUtils])
@@ -22,10 +23,12 @@
 
 (defonce hashtag-count
   (-> (fs/flat-map stream (fn[tweet] (filter #(< 0 (count %)) (get-hashtags (.getText tweet)))))
-      (fs/map #(vec [% 1]))
+      (fs/map-to-pair #(ft/tuple % 1))
       (fs/reduce-by-key-and-window + 30000 10000)
-      (fs/map (fn [[tag cnt]] [cnt tag]))
-      (fs/transform #(f/sort-by-key % >))))
+      (fs/map (ft/key-val-fn (f/fn [tag cnt] [cnt tag])))
+      ;(fs/map-to-pair (ft/key-val-fn (f/fn [tag cnt] (ft/tuple cnt tag))))
+      ;(fs/transform #(f/sort-by-key % >))
+))
 
 (defn -main []
   (fs/print hashtag-count)
