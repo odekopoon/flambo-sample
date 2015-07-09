@@ -3,9 +3,9 @@
   :url "https://github.com/hiroftp/flambo-sample"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [yieldbot/flambo "0.4.0-SNAPSHOT"]
-                 [org.clojure/tools.logging "0.2.6"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [yieldbot/flambo "0.4.0"]
+                 [org.clojure/tools.logging "0.3.1"]
                  [log4j "1.2.15" :exclusions [javax.mail/mail
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
