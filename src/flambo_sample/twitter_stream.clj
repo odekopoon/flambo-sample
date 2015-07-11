@@ -21,8 +21,17 @@
 (defn get-hashtags [tweet]
   (re-seq #"#[Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+" tweet))
 
+(defn sort-by-count [rdd]
+  (-> rdd
+      ;JavaRDD -> JavaPairRDD
+      (f/map-to-pair (fn [[tag cnt]] (ft/tuple cnt tag)))
+      ;JavaPairRDD -> JavaPairRDD
+      (f/sort-by-key >)
+      ;JavaPairRDD -> JavaRDD
+      (f/map f/untuple)))
+
 (defonce hashtag-count
-  (-> (fs/flat-map stream (fn[tweet] (filter #(< 0 (count %)) (get-hashtags (.getText tweet)))))
+  (-> (fs/flat-map stream (fn [tweet] (filter #(< 0 (count %)) (get-hashtags (.getText tweet)))))
       ;JavaRDD -> JavaPairRDD
       (fs/map-to-pair #(ft/tuple % 1))
       ;JavaPairRDD -> JavaPairRDD
@@ -30,17 +39,8 @@
       ;JavaPairRDD -> JavaRDD
       (fs/map f/untuple)
       ;JavaRDD -> JavaRDD (not streaming)
-      (fs/transform (f/fn [s]
-          (-> s
-              ;JavaRDD -> JavaPairRDD
-              (f/map-to-pair (f/fn [[tag cnt]] (ft/tuple cnt tag)))
-              ;JavaPairRDD -> JavaPairRDD
-              (f/sort-by-key >)
-              ;JavaPairRDD -> JavaRDD
-              (fs/map f/untuple)
-              )
-          ))
-      ))
+      (fs/transform sort-by-count)))
+
 (defn -main []
   (fs/print hashtag-count)
   (.start ssc)
