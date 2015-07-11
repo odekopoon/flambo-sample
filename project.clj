@@ -16,11 +16,11 @@
                     flambo-sample.twitter_stream]}
              :provided
              {:dependencies
-              [[org.apache.spark/spark-core_2.10 "1.3.0"]
-               [org.apache.spark/spark-streaming_2.10 "1.3.0"]
-               [org.apache.spark/spark-streaming-kafka_2.10 "1.3.0"]
-               [org.apache.spark/spark-streaming-flume_2.10 "1.3.0"]
-               [org.apache.spark/spark-streaming-twitter_2.10 "1.3.0"]]}
+              [[org.apache.spark/spark-core_2.10 "1.4.0"]
+               [org.apache.spark/spark-streaming_2.10 "1.4.0"]
+               [org.apache.spark/spark-streaming-kafka_2.10 "1.4.0"]
+               [org.apache.spark/spark-streaming-flume_2.10 "1.4.0"]
+               [org.apache.spark/spark-streaming-twitter_2.10 "1.4.0"]]}
              :uberjar
              {:aot :all}
              }
