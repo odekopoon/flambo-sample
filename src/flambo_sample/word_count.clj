@@ -12,7 +12,10 @@
     (f/map-to-pair (f/fn [s] (ft/tuple s 1)))
     ;JavaPairRDD -> JavaPairRDD
     (f/reduce-by-key +)
+    ;JavaPairRDD -> JavaRDD
+    (f/map f/untuple)
     ;JavaRDD or JavaPairRDD
     (f/collect)
     ;JavaRDD or JavaPairRDD
-    (clojure.pprint/pprint))
+    (clojure.pprint/pprint)
+    )
