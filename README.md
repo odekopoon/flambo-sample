@@ -4,7 +4,17 @@ A Clojure library designed to ... well, that part is up to you.
 
 ## Usage
 
-FIXME
+```bash
+git clone https://github.com/odekopoon/flambo-sample.git
+cd flambo-sample
+vi src/twitter4j.properties
+
+lein deps
+lein clean; lein compile
+lein trampoline run
+
+open http://localhost:4040/
+```
 
 ## License
 
