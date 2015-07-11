@@ -17,5 +17,4 @@
     ;JavaRDD or JavaPairRDD
     (f/collect)
     ;JavaRDD or JavaPairRDD
-    (clojure.pprint/pprint)
-    )
+    (clojure.pprint/pprint))
